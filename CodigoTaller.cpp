@@ -85,39 +85,46 @@ int main(){
 #include <iostream>
 using namespace std;
 
-int duplicar(int x){
+int DUPLICAR(int x){
 return x * 2;
 }
-int triplicar(int x){
-    return x * 3;
-}
-void Arreglos(int *arr, int n, int (*operacion)(int)){
-        for (int i = 0; i < n; i++){
-            *(arr + i) = operacion(*(arr+i));
-        }
+
+int Triplicar(int x){
+    return x * 1.5;
 }
 
-int main (){
+void ArreglosMultiplicados(int *arr, int n, int (*operacion)(int)){
+    for (int i = 0; i < n; i++){
+        arr[i] = operacion(arr[i]);
+    }
+}
+
+
+int main () {
     int n;
-    cout<<"Porfavor ingrese la cantidad de valores en el arreglo"<<endl;
+    cout<<"# de elementos de la lista: ";
     cin>>n;
-    int *arreglo = new int[n];
-    cout<<"Porfavor ponga los valores de cada elemento del arreglo"<<endl;
+    cout<<"Elementos de la lista:\n";
+    int *arr = new int[n];
+     
     for (int i = 0; i < n; i++){
-        cin>>arreglo[i];
+        cin>>arr[i];
     }
-    Arreglos(arreglo, n, duplicar);
-    cout<<"Numero duplicado"<<endl;
-    for (int i = 0; i < n; i++)
-    cout << *(arreglo + i)<<endl;
-
-    Arreglos(arreglo, n, triplicar);
-    cout<<"Numero triplicado"<<endl;
+    
+    ArreglosMultiplicados(arr, n, DUPLICAR);
+    cout<<"Numeros Duplicados:\n";
+    
     for (int i = 0; i < n; i++){
-        cout<<*(arreglo + i)<<endl;
+        cout<<arr[i]<<",";
     }
-
-    return 0;
+    
+    ArreglosMultiplicados(arr, n, Triplicar);
+    cout<<"Numeros Triplicados:\n";
+    
+        for (int i = 0; i < n; i++){
+        cout<<arr[i]<<",";
+    }
+    delete[]arr;
 }
 
 //Parte 5
